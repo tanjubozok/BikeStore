@@ -32,7 +32,15 @@ namespace BikeStore.WinForm.Repositories.Concrete
 
         public int InsertData(UpdateProductSp dataItem)
         {
-            throw new System.NotImplementedException();
+            var resultProductData = new
+            {
+                product_name = dataItem.product_name,
+                brand_id = dataItem.brand_id,
+                category_id = dataItem.category_id,
+                model_year = dataItem.model_year,
+                list_price = dataItem.list_price
+            };
+            return _sqlConnection.Execute("InsertProduct", resultProductData, commandType: CommandType.StoredProcedure);
         }
 
         public int UpdateData(UpdateProductSp dataItem)

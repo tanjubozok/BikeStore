@@ -7,22 +7,18 @@ namespace BikeStore.WinForm.Forms
 {
     public partial class FrmAddProduct : Form
     {
-        private int _product_id;
-
-        public FrmAddProduct(int product_id)
+        public FrmAddProduct()
         {
             InitializeComponent();
-            _product_id = product_id;
         }
 
         private void FrmAddProduct_Load(object sender, EventArgs e)
         {
-            Brands();
-            Categories();
-            GetById();
+            GetBrands();
+            GetCategories();
         }
 
-        private void Brands()
+        private void GetBrands()
         {
             using (BrandRepository brandRepository = new BrandRepository())
             {
@@ -32,7 +28,7 @@ namespace BikeStore.WinForm.Forms
             }
         }
 
-        private void Categories()
+        private void GetCategories()
         {
             using (CategoryRepository categoryRepository = new CategoryRepository())
             {
@@ -42,20 +38,7 @@ namespace BikeStore.WinForm.Forms
             }
         }
 
-        private void GetById()
-        {
-            using (ProductRepository productRepository = new ProductRepository())
-            {
-                var dataItem = productRepository.GetDataById(_product_id);
-                textBox_product_name.Text = dataItem.product_name;
-                textBox_product_price.Text = dataItem.list_price.ToString();
-                textBox_product_year.Text = dataItem.model_year.ToString();
-                comboBox_brand.SelectedValue = dataItem.brand_id;
-                comboBox_category.SelectedValue = dataItem.category_id;
-            }
-        }
-
-        private void button_update_Click(object sender, EventArgs e)
+        private void button_add_Click(object sender, EventArgs e)
         {
             using (ProductRepository productRepository = new ProductRepository())
             {
@@ -63,38 +46,20 @@ namespace BikeStore.WinForm.Forms
                 {
                     brand_id = Convert.ToInt32(comboBox_brand.SelectedValue),
                     category_id = Convert.ToInt32(comboBox_category.SelectedValue),
-                    list_price = Convert.ToDecimal(textBox_product_price.Text),
-                    model_year = Convert.ToInt32(textBox_product_year.Text),
                     product_name = textBox_product_name.Text,
-                    product_id = _product_id
+                    list_price = Convert.ToDecimal(textBox_product_price.Text),
+                    model_year = Convert.ToInt32(textBox_product_year.Text)
                 };
-                int resultProduct = productRepository.UpdateData(updateProductSp);
-                if (resultProduct == 1)
+                var resultProduct = productRepository.InsertData(updateProductSp);
+                if (resultProduct > 0)
                 {
-                    MessageBox.Show("Ürün Güncellendi", "Bilgi");
+                    MessageBox.Show("Ürün eklendi", "Bilgi");
                     this.Close();
                 }
                 else
-                    MessageBox.Show("Ürün Güncellenemedi", "Bilgi");
-            }
-        }
-
-        private void button_delete_Click(object sender, EventArgs e)
-        {
-            using (ProductRepository productRepository = new ProductRepository())
-            {
-                UpdateProductSp deleteProductSp = new UpdateProductSp
                 {
-                    product_id = _product_id
-                };
-                int resultProduct = productRepository.DeleteData(deleteProductSp);
-                if (resultProduct == 1)
-                {
-                    MessageBox.Show("Ürün Silindi", "Bilgi");
-                    this.Close();
+                    MessageBox.Show("Ürün eklenemedi", "Bilgi");
                 }
-                else
-                    MessageBox.Show("Ürün Silinemedi", "Bilgi");
             }
         }
     }

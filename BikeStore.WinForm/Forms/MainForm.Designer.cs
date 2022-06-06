@@ -29,14 +29,16 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGridView_product = new System.Windows.Forms.DataGridView();
             this.button_new_record = new System.Windows.Forms.Button();
+            this.dataGridView_product = new System.Windows.Forms.DataGridView();
+            this.button_refresh = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_product)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button_refresh);
             this.groupBox1.Controls.Add(this.button_new_record);
             this.groupBox1.Controls.Add(this.dataGridView_product);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -46,6 +48,18 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ürünler";
+            // 
+            // button_new_record
+            // 
+            this.button_new_record.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_new_record.ForeColor = System.Drawing.Color.Green;
+            this.button_new_record.Location = new System.Drawing.Point(6, 19);
+            this.button_new_record.Name = "button_new_record";
+            this.button_new_record.Size = new System.Drawing.Size(81, 27);
+            this.button_new_record.TabIndex = 1;
+            this.button_new_record.Text = "Ekle";
+            this.button_new_record.UseVisualStyleBackColor = true;
+            this.button_new_record.Click += new System.EventHandler(this.button_new_record_Click);
             // 
             // dataGridView_product
             // 
@@ -61,15 +75,17 @@
             this.dataGridView_product.TabIndex = 0;
             this.dataGridView_product.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_product_CellDoubleClick);
             // 
-            // button_new_record
+            // button_refresh
             // 
-            this.button_new_record.Location = new System.Drawing.Point(6, 19);
-            this.button_new_record.Name = "button_new_record";
-            this.button_new_record.Size = new System.Drawing.Size(81, 27);
-            this.button_new_record.TabIndex = 1;
-            this.button_new_record.Text = "Ekle";
-            this.button_new_record.UseVisualStyleBackColor = true;
-            this.button_new_record.Click += new System.EventHandler(this.button_new_record_Click);
+            this.button_refresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_refresh.ForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.button_refresh.Location = new System.Drawing.Point(93, 19);
+            this.button_refresh.Name = "button_refresh";
+            this.button_refresh.Size = new System.Drawing.Size(81, 27);
+            this.button_refresh.TabIndex = 2;
+            this.button_refresh.Text = "Yenile";
+            this.button_refresh.UseVisualStyleBackColor = true;
+            this.button_refresh.Click += new System.EventHandler(this.button_refresh_Click);
             // 
             // MainForm
             // 
@@ -77,6 +93,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(917, 503);
             this.Controls.Add(this.groupBox1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";
@@ -92,5 +110,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dataGridView_product;
         private System.Windows.Forms.Button button_new_record;
+        private System.Windows.Forms.Button button_refresh;
     }
 }
