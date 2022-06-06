@@ -10,33 +10,31 @@ namespace BikeStore.WinForm.Repositories.Concrete
 {
     public class BrandRepository : BaseConnection, IBaseRepository<Brand>
     {
-        public int DeleteDate(Brand dataItem)
+        public int DeleteData(Brand dataItem)
         {
             throw new System.NotImplementedException();
         }
 
         public List<Brand> GetAllData()
         {
-            List<Brand> data = new List<Brand>();
-            string query = QueryStrings.GetAllBrandData();
-            data = _sqlConnection.Query<Brand>(query).ToList();
+            string query = BrandQueries.GetAll();
+            var data = _sqlConnection.Query<Brand>(query).ToList();
             return data;
         }
 
         public Brand GetDataById(int dataItemId)
         {
-            Brand data = null;
-            string query = QueryStrings.GetDataBrandById(dataItemId);
-            data = _sqlConnection.QueryFirstOrDefault<Brand>(query);
+            string query = BrandQueries.GetById(dataItemId);
+            var data = _sqlConnection.QueryFirstOrDefault<Brand>(query);
             return data;
         }
 
-        public int InsertDate(Brand dataItem)
+        public int InsertData(Brand dataItem)
         {
             throw new System.NotImplementedException();
         }
 
-        public int UpdateDate(Brand dataItem)
+        public int UpdateData(Brand dataItem)
         {
             throw new System.NotImplementedException();
         }

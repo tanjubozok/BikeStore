@@ -1,15 +1,21 @@
-﻿using BikeStore.WinForm.Models.Database;
+﻿using BikeStore.WinForm.Helpers;
+using BikeStore.WinForm.Models.Database;
 using BikeStore.WinForm.Models.StoredProcedures;
+using BikeStore.WinForm.Models.ViewModels;
 using BikeStore.WinForm.Repositories.Abstract;
+using Dapper;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 
 namespace BikeStore.WinForm.Repositories.Concrete
 {
     public class ProductRepository : BaseConnection, IBaseRepository<UpdateProductSp>
     {
-        public int DeleteDate(UpdateProductSp dataItem)
+        public int DeleteData(UpdateProductSp dataItem)
         {
-            throw new System.NotImplementedException();
+            var resultProductId = new { product_id = dataItem.product_id };
+            return _sqlConnection.Execute("DeleteProductById", resultProductId, commandType: CommandType.StoredProcedure);
         }
 
         public List<UpdateProductSp> GetAllData()
@@ -19,17 +25,26 @@ namespace BikeStore.WinForm.Repositories.Concrete
 
         public UpdateProductSp GetDataById(int dataItemId)
         {
-            throw new System.NotImplementedException();
+            string query = ProductQueries.GetById(dataItemId);
+            var updateProduct = _sqlConnection.QueryFirstOrDefault<UpdateProductSp>(query);
+            return updateProduct;
         }
 
-        public int InsertDate(UpdateProductSp dataItem)
+        public int InsertData(UpdateProductSp dataItem)
         {
             throw new System.NotImplementedException();
         }
 
-        public int UpdateDate(UpdateProductSp dataItem)
+        public int UpdateData(UpdateProductSp dataItem)
         {
-            throw new System.NotImplementedException();
+            return _sqlConnection.Execute("UpdateProduct", dataItem, commandType: CommandType.StoredProcedure);
+        }
+
+        public List<ProductListViewModel> GetAll()
+        {
+            string query = ProductQueries.GetAll();
+            var dataItemList = _sqlConnection.Query<ProductListViewModel>(query).ToList();
+            return dataItemList;
         }
     }
 }

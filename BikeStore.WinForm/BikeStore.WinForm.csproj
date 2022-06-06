@@ -50,13 +50,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\FrmAddProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmAddProduct.Designer.cs">
+      <DependentUpon>FrmAddProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\QueryStrings.cs" />
+    <Compile Include="Helpers\BrandQueries.cs" />
+    <Compile Include="Helpers\CategoryQueries.cs" />
+    <Compile Include="Helpers\ProductQueries.cs" />
     <Compile Include="Models\Database\BaseConnection.cs" />
     <Compile Include="Models\Entities\Brand.cs" />
     <Compile Include="Models\Entities\Category.cs" />
@@ -70,6 +78,9 @@
     <Compile Include="Repositories\Concrete\BrandRepository.cs" />
     <Compile Include="Repositories\Concrete\CategoryRepository.cs" />
     <Compile Include="Repositories\Concrete\ProductRepository.cs" />
+    <EmbeddedResource Include="Forms\FrmAddProduct.resx">
+      <DependentUpon>FrmAddProduct.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

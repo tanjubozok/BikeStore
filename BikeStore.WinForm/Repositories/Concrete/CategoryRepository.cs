@@ -10,33 +10,31 @@ namespace BikeStore.WinForm.Repositories.Concrete
 {
     public class CategoryRepository : BaseConnection, IBaseRepository<Category>
     {
-        public int DeleteDate(Category dataItem)
+        public int DeleteData(Category dataItem)
         {
             throw new System.NotImplementedException();
         }
 
         public List<Category> GetAllData()
         {
-            List<Category> data = new List<Category>();
-            string query = QueryStrings.GetAllCategoryData();
-            data = _sqlConnection.Query<Category>(query).ToList();
+            string query = CategoryQueries.GetAll();
+            var data = _sqlConnection.Query<Category>(query).ToList();
             return data;
         }
 
         public Category GetDataById(int dataItemId)
         {
-            Category data = null;
-            string query = QueryStrings.GetDataCategoryById(dataItemId);
-            data = _sqlConnection.QueryFirstOrDefault<Category>(query);
+            string query = CategoryQueries.GetById(dataItemId);
+            var data = _sqlConnection.QueryFirstOrDefault<Category>(query);
             return data;
         }
 
-        public int InsertDate(Category dataItem)
+        public int InsertData(Category dataItem)
         {
             throw new System.NotImplementedException();
         }
 
-        public int UpdateDate(Category dataItem)
+        public int UpdateData(Category dataItem)
         {
             throw new System.NotImplementedException();
         }
